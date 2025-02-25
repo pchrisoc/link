@@ -49,8 +49,12 @@ const setup = async () => {
   } catch (error) {
     return 'Database is not ready yet';
   } finally {
-    if (client) {
-      await client.close();
+    if (client && client.topology) {
+      try {
+        await client.close();
+      } catch (error) {
+        console.warn('Error while closing MongoDB client:', error);
+      }
     }
   }
 };

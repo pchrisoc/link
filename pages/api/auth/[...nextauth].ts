@@ -3,12 +3,22 @@ import GitHubProvider from 'next-auth/providers/github';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import clientPromise from 'lib/mongodb';
 
+// Extend the NextAuth types for custom properties
+declare module 'next-auth' {
+  interface Session {
+    username: string;
+  }
+  interface User {
+    username: string;
+  }
+}
+
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
       profile(profile) {
         return {
           id: profile.id.toString(),
@@ -24,7 +34,6 @@ export default NextAuth({
   ],
   callbacks: {
     async session({ session, user }) {
-      // Send properties to the client, like an access_token from a provider.
       session.username = user.username;
       return session;
     }

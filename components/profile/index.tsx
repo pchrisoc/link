@@ -9,7 +9,6 @@ import {
   UploadIcon,
   XIcon
 } from '@/components/icons';
-import { useSession } from 'next-auth/react';
 import BlurImage from '../blur-image';
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -27,7 +26,6 @@ export default function Profile({
   user: UserProps;
 }) {
   const router = useRouter();
-  const { data: session } = useSession();
   const [saving, setSaving] = useState(false);
   const [data, setData] = useState({
     username: user.username,
@@ -236,7 +234,7 @@ export default function Profile({
             </a>
           </Link>
         </div>
-      ) : session?.username === user.username ? (
+      ) : (
         <Link
           href={{ query: { settings: true } }}
           as="/settings"
@@ -248,7 +246,7 @@ export default function Profile({
             <EditIcon className="h-4 w-4 text-white" />
           </a>
         </Link>
-      ) : null}
+      )}
     </div>
   );
 }

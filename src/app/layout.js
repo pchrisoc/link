@@ -4,8 +4,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Mini Link',
-  description: 'Levate your online presence with Mini Link – simplifying links for effortless sharing and maximizing your impact.',
+  title: 'PChrisOC',
+  description: 'Simplify your links',
 }
 
 export default function RootLayout({ children }) {

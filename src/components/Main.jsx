@@ -9,7 +9,7 @@ export default function Main() {
             <NavBar />
             <Page />
             <Form />
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

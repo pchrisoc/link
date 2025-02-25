@@ -75,7 +75,6 @@ export default function Form() {
             ) : (
                 <section className="bg-gray-50 flex items-center justify-center">
                     <div className="bg-white p-8 rounded-lg shadow-md md:w-4/6 mb-12">
-                        <h2 className="text-2xl font-bold mb-4 text-gray-800">Shorten a Long Link</h2>
                         <form onSubmit={handleFormSubmit}>
                             <div className="mb-4">
                                 <label className="block text-l text-gray-700 text-sm font-bold mb-2" htmlFor="longURL">

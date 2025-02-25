@@ -14,7 +14,7 @@ export default function Home({ user }: { user: UserProps }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // You should remove this try-catch block once your MongoDB Cluster is fully provisioned
+  // You should remove this try-catch block once your MongoDB Cluster is fully provisioned.
   try {
     await clientPromise;
   } catch (e: any) {

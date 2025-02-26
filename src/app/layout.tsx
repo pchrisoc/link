@@ -5,8 +5,8 @@ import '@mantine/core/styles.css';
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
 
 export const metadata = {
-  title: 'My Mantine app',
-  description: 'I have followed setup instructions carefully',
+  title: 'pchrisoc.com',
+  description: 'shorten links',
 };
 
 export default function RootLayout({

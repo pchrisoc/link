@@ -122,7 +122,8 @@ export default function Form() {
               styles={{
                 input: {
                   flex: 1,
-                  maxWidth: '300px',
+                  maxWidth: '100%',
+                  minWidth: '300px',
                   backgroundColor: '#333333',
                   borderRadius: '9999px',
                   color: 'white',

@@ -109,15 +109,8 @@ export default function Form() {
         >
           links
         </Title>
-        <form onSubmit={handleFormSubmit} style={{ marginBottom: '2rem' }}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
+        <form onSubmit={handleFormSubmit} style={{ marginBottom: '2rem', width: '100%', maxWidth: '500px' }}>
+          <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <TextInput
               id="longURL"
               placeholder="https://example.com"
@@ -128,7 +121,8 @@ export default function Form() {
               radius="xl"
               styles={{
                 input: {
-                  width: '300px',
+                  flex: 1,
+                  maxWidth: '300px',
                   backgroundColor: '#333333',
                   borderRadius: '9999px',
                   color: 'white',
@@ -145,7 +139,8 @@ export default function Form() {
               radius="xl"
               styles={{
                 input: {
-                  width: '200px',
+                  flex: 1,
+                  maxWidth: '200px',
                   backgroundColor: '#333333',
                   borderRadius: '9999px',
                   color: 'white',
@@ -278,6 +273,12 @@ export default function Form() {
           0% { opacity: 1; }
           80% { opacity: 1; }
           100% { opacity: 0; }
+        }
+        @media (max-width: 600px) {
+          .form-group {
+            flex-direction: column;
+            gap: 0.5rem;
+          }
         }
       `}</style>
     </>

@@ -9,7 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@mantine/core": "^7.17.0",
+    "@mantine/hooks": "^7.17.0",
+    "@tabler/icons-react": "^3.30.0",
     "dotenv": "^16.3.1",
+    "mongodb": "^6.13.1",
     "mongoose": "^7.5.4",
     "nanoid": "^5.0.1",
     "next": "13.5.4",
@@ -23,7 +28,9 @@
     "dotenv-cli": "^8.0.0",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
-    "postcss": "^8",
+    "postcss": "^8.5.3",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^3"
   }
 }

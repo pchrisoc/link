@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { nanoid } from "nanoid";
 
-import connectMongoDB from "@/config/database";
-import Url from "@/models/url";
+import connectMongoDB from "/src/config/database";
+import Url from "/src/models/url";
 
 export async function POST(request) {
     try {

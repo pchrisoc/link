@@ -1,5 +1,5 @@
-import connectMongoDB from "@/config/database";
-import Url from "@/models/url";
+import connectMongoDB from "/src/config/database";
+import Url from "/src/models/url";
 
 import { notFound, redirect } from "next/navigation";
 

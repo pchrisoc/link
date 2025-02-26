@@ -43,7 +43,3 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 ## Contributing
 
 Feel free to submit issues or pull requests for improvements. Please follow the repository's code of conduct.
-
-## License
-
-This project is licensed under the MIT License.

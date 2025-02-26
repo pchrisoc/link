@@ -269,6 +269,10 @@ export default function Form() {
       )}
 
       <style jsx global>{`
+        html, body {
+          overscroll-behavior: none;
+          -webkit-overflow-scrolling: auto;
+        }
         @keyframes fadeOut {
           0% { opacity: 1; }
           80% { opacity: 1; }

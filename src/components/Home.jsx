@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react';
 import { Accordion, TextInput, Title, Group, ActionIcon } from '@mantine/core';
-import { IconCopy, IconDownload, IconLink, IconCheck } from '@tabler/icons-react';
-import Swal from 'sweetalert2';
+import { IconCopy, IconDownload, IconLink, IconCheck, IconExclamationCircle } from '@tabler/icons-react';
 import QRCode from 'qrcode.react';
 
 export default function Form() {
@@ -13,6 +12,8 @@ export default function Form() {
   const [isFetching, setIsFetching] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showCopySuccess, setShowCopySuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -46,19 +47,15 @@ export default function Form() {
         setCustomAddress('');
       } else {
         const errorData = await response.json();
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: `There was an error shortening the URL. ${errorData.message}`,
-        });
+        setErrorMessage(`Error: ${errorData.message}`);
+        setShowError(true);
+        setTimeout(() => setShowError(false), 3000);
       }
     } catch (error) {
       console.error('Error:', error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Network Error',
-        text: 'There was a network error. Please try again later.',
-      });
+      setErrorMessage('Network Error: There was a network error. Please try again later.');
+      setShowError(true);
+      setTimeout(() => setShowError(false), 3000);
     } finally {
       setIsFetching(false);
     }
@@ -223,8 +220,7 @@ export default function Form() {
                         variant="outline"
                         radius="xl"
                         size="lg"
-                        style={{ marginTop: '1rem' }}
-                        sx={{ borderColor: 'blue', color: 'blue' }}
+                        sx={{ marginTop: '1rem', borderColor: 'blue', color: 'blue' }}
                       >
                         <IconDownload size={20} />
                       </ActionIcon>
@@ -239,33 +235,46 @@ export default function Form() {
 
       {/* Checkmark for successful shortening */}
       {showSuccess && (
-        <div style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          background: 'rgba(0,0,0,0.7)',
-          padding: '10px',
-          borderRadius: '50%',
-          zIndex: 9999,
-          animation: 'fadeOut 3s forwards'
-        }}>
-          <IconCheck size={24} color="limegreen" />
+        <div className="popup">
+          <ActionIcon
+              onClick={() => alert("URL shortened successfully")}
+              color="gray"
+              radius="xl"
+              size={42}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+            <IconCheck size={30} color="white" />
+          </ActionIcon>
         </div>
       )}
 
       {/* Checkmark for successful copy */}
       {showCopySuccess && (
-        <div style={{
-          position: 'fixed',
-          bottom: '80px',
-          right: '20px',
-          background: 'rgba(0,0,0,0.7)',
-          padding: '10px',
-          borderRadius: '50%',
-          zIndex: 9999,
-          animation: 'fadeOut 3s forwards'
-        }}>
-          <IconCheck size={24} color="limegreen" />
+        <div className="popup">
+          <ActionIcon
+              onClick={() => alert("Copied to clipboard")}
+              color="gray"
+              radius="xl"
+              size={42}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+            <IconCheck size={30} color="white" />
+          </ActionIcon>
+        </div>
+      )}
+
+      {/* Error message popup */}
+      {showError && (
+        <div className="popup">
+          <ActionIcon
+              onClick={() => alert(errorMessage)}
+              color="gray"
+              radius="xl"
+              size={42}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+            <IconExclamationCircle size={30} color="white" />
+          </ActionIcon>
         </div>
       )}
 
@@ -284,6 +293,15 @@ export default function Form() {
             flex-direction: column;
             gap: 0.5rem;
           }
+        }
+        .popup {
+          position: fixed;
+          bottom: 80px;
+          right: 20px;
+          padding: 10px;
+          border-radius: 50%;
+          z-index: 9999;
+          animation: fadeOut 3s forwards;
         }
       `}</style>
     </>

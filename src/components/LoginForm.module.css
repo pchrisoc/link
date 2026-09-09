@@ -1,0 +1,68 @@
+.page {
+  min-height: 100vh;
+  background: #121212;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  color-scheme: dark;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: #1f1f1f;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.label {
+  color: #eee;
+}
+
+.input {
+  background: #292929;
+  border-color: #484848;
+  color: #fff;
+}
+
+.input:focus,
+.input:focus-within {
+  border-color: #fff;
+}
+
+.password {
+  color: #fff;
+}
+
+.input:autofill,
+.password:autofill {
+  -webkit-text-fill-color: #fff;
+  box-shadow: 0 0 0 1000px #292929 inset;
+  caret-color: #fff;
+}
+
+.visibilityToggle {
+  color: #bbb;
+}
+
+.visibilityToggle:hover {
+  background: #3a3a3a;
+  color: #fff;
+}
+
+.submit {
+  background: #fff;
+  color: #121212;
+  border-color: #fff;
+}
+
+.submit:hover {
+  background: #e6e6e6;
+  border-color: #e6e6e6;
+}
+
+.submit:focus-visible,
+.visibilityToggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}

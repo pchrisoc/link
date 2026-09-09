@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Accordion, TextInput, Title, Group, ActionIcon } from '@mantine/core';
+import { Accordion, TextInput, Title, Group, ActionIcon, Button } from '@mantine/core';
 import { IconCopy, IconDownload, IconLink, IconCheck, IconExclamationCircle } from '@tabler/icons-react';
 import QRCode from 'qrcode.react';
 
@@ -17,7 +17,6 @@ export default function Form() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const domain = typeof window !== 'undefined' ? window.location.origin : '';
 
     try {
       setIsFetching(true);
@@ -26,12 +25,14 @@ export default function Form() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           url: longURL,
-          token: '',
           customAddress,
-          domain,
         }),
       });
 
+      if (response.status === 401) {
+        window.location.replace('/login');
+        return;
+      }
       if (response.ok) {
         const data = await response.json();
         const newLink = {
@@ -60,6 +61,17 @@ export default function Form() {
       setIsFetching(false);
     }
   };
+
+  async function signOut() {
+    try {
+      const response = await fetch('/api/auth/logout', { method: 'POST' });
+      if (!response.ok) throw new Error('Sign-out failed. Please try again.');
+      window.location.replace('/login');
+    } catch {
+      setErrorMessage('Sign-out failed. Please try again.');
+      setShowError(true);
+    }
+  }
 
   function copyToClipboard(shortenedURL) {
     navigator.clipboard.writeText(shortenedURL).then(() => {
@@ -96,6 +108,7 @@ export default function Form() {
           justifyContent: 'center'
         }}
       >
+        <Button variant="subtle" color="gray" onClick={signOut} style={{ position: 'absolute', top: 16, right: 16 }}>Sign out</Button>
         <Title
           order={1}
           style={{
@@ -106,6 +119,7 @@ export default function Form() {
         >
           links
         </Title>
+        {showError && <p role="alert" style={{ color: '#ffb4b4' }}>{errorMessage}</p>}
         <form onSubmit={handleFormSubmit} style={{ marginBottom: '2rem', width: '100%', maxWidth: '500px' }}>
           <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <TextInput

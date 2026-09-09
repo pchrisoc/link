@@ -1,6 +1,10 @@
 import Home from '../components/Home';
 
-export default function HomePage() {
+import { redirect } from 'next/navigation';
+import { getSession } from '../lib/auth';
+
+export default async function HomePage() {
+  if (!await getSession()) redirect('/login');
   return (
     <main>
       <Home />
